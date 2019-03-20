@@ -1,0 +1,11 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("grDevices", "adjustcolor", "dev.new", "quartz")
+importFrom("graphics", "axis", "hist", "lines", "mtext", "par", "plot",
+           "polygon", "rect", "segments", "text", "title")
+importFrom("methods", "new")
+importFrom("stats", "density")
+importFrom("scales", "alpha")
+importFrom("graphics", "box")
+importFrom("coda", 'raftery.diag')
+importFrom('assertive', 'assert_is_s4', 'assert_is_numeric')
+importFrom('rstan', 'extract')
