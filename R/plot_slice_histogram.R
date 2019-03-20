@@ -489,6 +489,8 @@ plot_slice_histogram <- function(object = NULL, slices = NULL) {
 
   }
 
+  parameters <- as.matrix(parameters)
+
   # Create a plot for each parameter
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
 

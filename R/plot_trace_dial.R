@@ -545,6 +545,8 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     return(object)
   }
 
+  parameters <- as.matrix(parameters)
+
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
 
   return(object)

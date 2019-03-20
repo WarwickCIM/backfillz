@@ -268,6 +268,8 @@ plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL,
 
   }
 
+  parameters <- as.matrix(parameters)
+
   # Create a plot for each parameter
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
 
