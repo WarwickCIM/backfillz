@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("grDevices", "adjustcolor", "dev.new", "quartz")
+importFrom("grDevices", "adjustcolor")
 importFrom("graphics", "axis", "hist", "lines", "mtext", "par", "plot",
            "polygon", "rect", "segments", "text", "title")
 importFrom("methods", "new")
