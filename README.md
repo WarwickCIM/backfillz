@@ -8,10 +8,13 @@ BackFillz.R slices and dices MCMC chains so increasingly parameter rich, complex
 # Quick Start
 
 ```r
-install.packages('backfillz')
+install.packages(devtools)
+devtools::install_github('warwickCIM/backfillz')
 require(backfillz)
 
-x <- stanfit
+# convert sample data to backfillz object
+x <- as_backfillz(sample_stanfit)
+
 slices <- data.frame(
   parameters = c('mu', 'mu', 'eta[1]', 'eta[1]'),
   lower = c(0,   0.6, 0.2, 0.7),
@@ -19,7 +22,13 @@ slices <- data.frame(
   stringsAsFactors = FALSE
 )
 
+# change theme
+x <- set_theme(x, 'demo 1')
+
+# create prototype plots
 x <- plot_slice_histogram(x, slices)
+x <- plot_trace_dial(x)
+x <- plot_spiral_stream(x)
 ```
 
 # Current prototype
