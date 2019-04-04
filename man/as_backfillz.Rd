@@ -4,10 +4,10 @@
 \alias{as_backfillz}
 \title{Convert stanFit object to a Backfillz object}
 \usage{
-as_backfillz(stanfit_object)
+as_backfillz(object)
 }
 \arguments{
-\item{stanfit_object}{Backfillz object}
+\item{object}{Stanfit or list object}
 }
 \description{
 Convert stanFit object to a Backfillz object

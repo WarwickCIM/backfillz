@@ -1,17 +1,22 @@
 #' Convert stanFit object to a Backfillz object
 #'
-#' @param stanfit_object  Backfillz object
-as_backfillz <- function(stanfit_object) {
+#' @param object        Stanfit or dataframe. Dataframe must contain columns 'parameters', 'iterations' and 'chains'.
+as_backfillz <- function(object) {
 
-  # check inputs
-  assertive::is_s4(stanfit_object)
-  stopifnot(class(stanfit_object) == 'stanfit')
+  # check arguments
+  stopifnot((class(object) == 'stanfit') | (class(object) == 'data.frame'))
 
   # create backfillz object
   backfillz_object <- methods::new('Backfillz')
 
   # populate backfillz object and set theme
-  backfillz_object@mcmc_samples <- rstan::extract(stanfit_object, permuted = FALSE)
+  if (class(object) == 'stanfit') {
+    backfillz_object@mcmc_samples <- rstan::extract(object, permuted = FALSE)
+    backfillz_object@mcmc_model <- object@stanmodel@model_code
+  } else if (class(object) == 'data.frame') {
+    backfillz_object@mcmc_samples <- df_to_stanarray(object)
+    backfillz_object@mcmc_model <- 'Samples imported from dataframe'
+  }
   backfillz_object <- set_theme(backfillz_object)
 
   return(backfillz_object)

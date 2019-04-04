@@ -7,13 +7,12 @@
 #' @param laps              Number of laps for the spitals. Defaults to 4.
 plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL, parameters = NULL, laps = 4){
   # check inputs
-  assertive::assert_is_s4(object)
-  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz'){
-    stop('Object is not a stanfit or Backfillz object')
+  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
+    stop('Object is not a stanfit, Backfillz or data frame object')
   }
 
   # convert stanfit
-  if(class(object) == 'stanfit') {
+  if((class(object) == 'stanfit') | (class(object) == 'data.frame')) {
     object <- as_backfillz(object)
   }
 

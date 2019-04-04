@@ -7,18 +7,18 @@
 plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 10) {
 
   # check inputs
-  assertive::assert_is_s4(object)
-  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz'){
-    stop('Object is not a stanfit or Backfillz object')
+  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
+    stop('Object is not a stanfit, Backfillz or data frame object')
   }
 
   assertive::assert_is_numeric(n_bins)
   assertive::assert_is_numeric(n_burnin)
 
   # convert stanfit
-  if(class(object) == 'stanfit') {
+  if((class(object) == 'stanfit') | (class(object) == 'data.frame')) {
     object <- as_backfillz(object)
   }
+
 
   # Preallocate the data frame stored in the backfillz object
   object@df_trace_dial <- data.frame(
@@ -36,7 +36,6 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
   # extract theme properties
   colour_trace_line             <- object@theme_text_font_colour
-  #colour_burnin_line            <- 'green'
   colour_guide_lines            <- object@theme_fg_colour
   colour_inner_burn_segment     <- alpha(colour = object@theme_mg_colour,
                                      alpha = (object@theme_alpha + 0.2))
@@ -134,6 +133,28 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       )
 
     text(0, 0, parameter, col = colour_guide_lines)
+
+    # Add plot labels
+
+    # bottom right
+    mtext(
+      at = 1,
+      text = 'BackFillz.R by CIM, University of Warwick',
+      side = 1,
+      cex = object@theme_text_cex_axis ,
+      col = object@theme_text_col_axis,
+      adj = 1
+    )
+
+    # top left
+    mtext(
+      at = -0.4,
+      text = 'Spiral plot',
+      side = 3,
+      cex = object@theme_text_cex_axis ,
+      col = object@theme_text_col_axis,
+      adj = 1
+    )
 
     # draw polygons and annotations
 
@@ -339,6 +360,16 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       type = 'n'
     )
 
+    # histogram label
+    mtext(
+      at = histograms_max_density,
+      text = 'Burn-in histrogram',
+      side = 2,
+      cex = object@theme_text_cex_axis ,
+      col = object@theme_text_col_axis,
+      adj = 1
+    )
+
     ## histogram background block
     rect(
       par('usr')[1],
@@ -467,6 +498,16 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       border = FALSE
     )
 
+    # histogram label
+    mtext(
+      at = histograms_max_density,
+      text = 'Sample histrogram',
+      side = 2,
+      cex = object@theme_text_cex_axis ,
+      col = object@theme_text_col_axis,
+      adj = 1
+    )
+
     ## draw histogram over top
     hist(
       chains,
@@ -531,6 +572,13 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       plot_histogram_lines(histogram_4, object@theme_palette[[i]])
     }
 
+    # CIM
+    # text( 0.5, 0.5,
+    #       labels= "BackFillz.R by CIM, University of Warwick",
+    #       cex= object@theme_text_cex_axis ,
+    #       col= object@theme_text_col_axis,
+    #       adj=1
+    # )
 
     # Save plot values in backfillz object
     object@df_trace_dial <<- rbind(

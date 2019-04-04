@@ -5,13 +5,12 @@
 plot_slice_histogram <- function(object = NULL, slices = NULL) {
 
   # check inputs
-  assertive::assert_is_s4(object)
-  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz'){
-    stop('Object is not a stanfit or Backfillz object')
+  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
+    stop('Object is not a stanfit, Backfillz or data frame object')
   }
 
   # convert stanfit
-  if(class(object) == 'stanfit') {
+  if((class(object) == 'stanfit') | (class(object) == 'data.frame')) {
     object <- as_backfillz(object)
   }
 
