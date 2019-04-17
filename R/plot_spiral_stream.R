@@ -254,6 +254,23 @@ plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL,
     mtext('Variance', 1, outer = TRUE, col = object@theme_text_font_colour, font = object@theme_text_font)
     mtext('Chain', 2, outer = TRUE, col = object@theme_text_font_colour, font = object@theme_text_font)
 
+    # Save plot within the backfillz object
+    this_plot <- recordPlot()
+    ID <- max(object@plot_history$ID + 1)
+    saved_plot_items <- list(
+      ID = ID,
+      parameters = parameter,
+      plot = this_plot
+    )
+
+    # Append plot details to the backfillz object
+    object@plot_store <<- append(
+      object@plot_store,
+      list(
+        saved_plot_items
+      )
+    )
+
     # Save plot values in backfillz object
     object@df_spiral_stream <<- rbind(
       object@df_spiral_stream,
@@ -271,6 +288,20 @@ plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL,
 
   # Create a plot for each parameter
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
+
+  ID <- max(object@plot_history$ID + 1)
+
+  # Update log
+  object@plot_history <- rbind(
+    object@plot_history,
+    data.frame(
+      ID = ID,
+      Date = date(),
+      Event = 'spiral_stream',
+      R_version = R.Version()$version.string,
+      stringsAsFactors = FALSE
+    )
+  )
 
   return(object)
   }

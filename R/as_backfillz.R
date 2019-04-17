@@ -19,5 +19,14 @@ as_backfillz <- function(object) {
   }
   backfillz_object <- set_theme(backfillz_object)
 
+  # initialise plot history
+  backfillz_object@plot_history <- data.frame(
+    ID = 1,
+    Date = date(),
+    Event = 'Object Creation',
+    R_version = R.Version()$version.string,
+    stringsAsFactors = FALSE
+  )
+
   return(backfillz_object)
 }

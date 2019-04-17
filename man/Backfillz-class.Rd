@@ -45,6 +45,10 @@ An S4 class to represent a the backfillz plot object.
 
 \item{\code{mcmc_model}}{Text definition of MCMC model}
 
+\item{\code{plot_history}}{Data frame with overall plot history}
+
+\item{\code{plot_store}}{List containing stored plots}
+
 \item{\code{df_slice_histogram}}{Slot containing data from plot_slice_histrogram function}
 
 \item{\code{df_trace_dial}}{Slot containing data from plot_slice_dial function}

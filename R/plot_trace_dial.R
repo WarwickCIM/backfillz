@@ -572,13 +572,22 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       plot_histogram_lines(histogram_4, object@theme_palette[[i]])
     }
 
-    # CIM
-    # text( 0.5, 0.5,
-    #       labels= "BackFillz.R by CIM, University of Warwick",
-    #       cex= object@theme_text_cex_axis ,
-    #       col= object@theme_text_col_axis,
-    #       adj=1
-    # )
+    # Save plot within the backfillz object
+    this_plot <- recordPlot()
+    ID <- max(object@plot_history$ID + 1)
+    saved_plot_items <- list(
+      ID = ID,
+      parameters = parameter,
+      plot = this_plot
+    )
+
+    # Append plot details to the backfillz object
+    object@plot_store <<- append(
+      object@plot_store,
+      list(
+        saved_plot_items
+      )
+    )
 
     # Save plot values in backfillz object
     object@df_trace_dial <<- rbind(
@@ -596,6 +605,20 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
   parameters <- as.matrix(parameters)
 
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
+
+  ID <- max(object@plot_history$ID + 1)
+
+  # Update log
+  object@plot_history <- rbind(
+    object@plot_history,
+    data.frame(
+      ID = ID,
+      Date = date(),
+      Event = 'spiral_stream',
+      R_version = R.Version()$version.string,
+      stringsAsFactors = FALSE
+    )
+  )
 
   return(object)
 

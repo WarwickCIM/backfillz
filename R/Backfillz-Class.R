@@ -17,6 +17,8 @@
 #' @slot theme_palette          List of hexdecimal colours for use in plots
 #' @slot mcmc_samples           MCMC samples from a bayesian model fit
 #' @slot mcmc_model             Text definition of MCMC model
+#' @slot plot_history           Data frame with overall plot history
+#' @slot plot_store             List containing stored plots
 #' @slot df_slice_histogram     Slot containing data from plot_slice_histrogram function
 #' @slot df_trace_dial          Slot containing data from plot_slice_dial function
 #' @slot df_spiral_stream       Slow containing data from plot_spiral_stream function
@@ -39,6 +41,8 @@ Backfillz <- methods::setClass("Backfillz",
                                  theme_palette = 'list',
                                  mcmc_samples = 'array',
                                  mcmc_model = 'character',
+                                 plot_history = 'data.frame',
+                                 plot_store = 'list',
                                  df_slice_histogram = 'data.frame',
                                  df_trace_dial = 'data.frame',
                                  df_spiral_stream = 'data.frame'
@@ -78,6 +82,16 @@ methods::setMethod(
 )
 
 methods::setMethod(
+  f = "summary",
+  signature = "Backfillz",
+  definition = function(object){
+    message(cat('Backfillz S4 Object'))
+
+    print(object@plot_history)
+  }
+)
+
+methods::setMethod(
   f = "show",
   signature = "Backfillz",
   definition = function(object){
@@ -99,6 +113,7 @@ methods::setMethod(
     }
 
     message(cat('\nPlot history'))
+
     if((nrow(object@df_slice_histogram) == 0) && (nrow(object@df_trace_dial) == 0) && (nrow(object@df_spiral_stream) == 0)){
       message(cat('No plots run. Plot this object by passing it to plot_slice_histogram or plot_trace_dial'))
     } else {
@@ -119,4 +134,3 @@ methods::setMethod(
 
     }
   )
-

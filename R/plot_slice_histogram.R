@@ -482,7 +482,22 @@ plot_slice_histogram <- function(object = NULL, slices = NULL) {
           adj=1
     )
 
-    ###
+    # Save plot within the backfillz object
+    this_plot <- recordPlot()
+    ID <- max(object@plot_history$ID + 1)
+    saved_plot_items <- list(
+      ID = ID,
+      parameters = parameter,
+      plot = this_plot
+    )
+
+    # Append plot details to the backfillz object
+    object@plot_store <<- append(
+      object@plot_store,
+      list(
+        saved_plot_items
+      )
+    )
 
     return(object)
 
@@ -492,6 +507,20 @@ plot_slice_histogram <- function(object = NULL, slices = NULL) {
 
   # Create a plot for each parameter
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
+
+  ID <- max(object@plot_history$ID + 1)
+
+  # Update log
+  object@plot_history <- rbind(
+    object@plot_history,
+    data.frame(
+      ID = ID,
+      Date = date(),
+      Event = 'Slice Historgram',
+      R_version = R.Version()$version.string,
+      stringsAsFactors = FALSE
+    )
+  )
 
   return(object)
 }
