@@ -1,5 +1,7 @@
 ![](fig1.png)
 
+[![DOI](https://zenodo.org/badge/176701637.svg)](https://zenodo.org/badge/latestdoi/176701637)
+
 # New View of MCMC
 
 Backfillz.R provides new visual diagnostics for understanding MCMC (Markov Chain Monte Carlo) analyses and outputs. MCMC chains can defy a simple line graph. Unless the chain is very short (which isn’t often the case), plotting tens or hundreds of thousands of data points reveals very little other than a ‘trace plot’ where we only see the outermost points. Common plotting methods may only reveal when an MCMC really hasn’t worked, but not when it has.
