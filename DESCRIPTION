@@ -1,7 +1,7 @@
 Package: backfillz
 Type: Package
 Title: MCMC visualisation package
-Version: 0.9.9000
+Version: 0.9.9900
 Authors@R: c(
             person('James', 'Tripp', email = 'james.tripp@warwick.ac.uk', role = c('aut', 'cre')),
             person('Gregory', 'McInerny', email = 'G.McInerny@warwick.ac.uk', role = 'aut')

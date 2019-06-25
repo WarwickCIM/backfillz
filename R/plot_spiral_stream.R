@@ -5,7 +5,11 @@
 #' @param steps             Vector of step increments for each spiral within chain. Defaults to 25 percent of sample for 4 steps.
 #' @param parameters        Vector of parameters to plot. Defaults to two parameters.
 #' @param laps              Number of laps for the spitals. Defaults to 4.
-plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL, parameters = NULL, laps = 4){
+#' @param save_plot         Set to TRUE to save plots in the Backfillz object.
+plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL, parameters = NULL, laps = 4, save_plot = FALSE){
+
+  assertive::assert_is_logical(save_plot)
+
   # check inputs
   if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
     stop('Object is not a stanfit, Backfillz or data frame object')
@@ -254,6 +258,27 @@ plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL,
     mtext('Variance', 1, outer = TRUE, col = object@theme_text_font_colour, font = object@theme_text_font)
     mtext('Chain', 2, outer = TRUE, col = object@theme_text_font_colour, font = object@theme_text_font)
 
+    # Save plot within the backfillz object
+    this_plot <- grDevices::recordPlot()
+    ID <- max(object@plot_history$ID + 1)
+    saved_plot_items <- list(
+      ID = ID,
+      time = date(),
+      type = 'Spiral stream',
+      parameters = parameter,
+      plot = this_plot
+    )
+
+    if (save_plot) {
+      # Append plot details to the backfillz object
+      object@plot_store <<- append(
+        object@plot_store,
+        list(
+          saved_plot_items
+        )
+      )
+    }
+
     # Save plot values in backfillz object
     object@df_spiral_stream <<- rbind(
       object@df_spiral_stream,
@@ -271,6 +296,21 @@ plot_spiral_stream <- function(object = NULL, start_sample = NULL, steps = NULL,
 
   # Create a plot for each parameter
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
+
+  ID <- max(object@plot_history$ID + 1)
+
+  # Update log
+  object@plot_history <- rbind(
+    object@plot_history,
+    data.frame(
+      ID = ID,
+      Date = date(),
+      Event = 'spiral_stream',
+      R_version = R.Version()$version.string,
+      Saved = save_plot,
+      stringsAsFactors = FALSE
+    )
+  )
 
   return(object)
   }

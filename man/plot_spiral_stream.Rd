@@ -5,7 +5,7 @@
 \title{Creates a spiral steamgrapgh of MCMC chains}
 \usage{
 plot_spiral_stream(object = NULL, start_sample = NULL, steps = NULL,
-  parameters = NULL, laps = 4)
+  parameters = NULL, laps = 4, save_plot = FALSE)
 }
 \arguments{
 \item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}
@@ -17,6 +17,8 @@ plot_spiral_stream(object = NULL, start_sample = NULL, steps = NULL,
 \item{parameters}{Vector of parameters to plot. Defaults to two parameters.}
 
 \item{laps}{Number of laps for the spitals. Defaults to 4.}
+
+\item{save_plot}{Set to TRUE to save plots in the Backfillz object.}
 }
 \description{
 Creates a spiral steamgrapgh of MCMC chains
