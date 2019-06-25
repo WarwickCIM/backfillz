@@ -2,7 +2,10 @@
 #'
 #' @param object            Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.
 #' @param slices            Dataframe giving the cut off points for the trace histograms and parameters to show.
-plot_slice_histogram <- function(object = NULL, slices = NULL) {
+#' @param save_plot         Set to TRUE to save plots in the Backfillz object.
+plot_slice_histogram <- function(object = NULL, slices = NULL, save_plot = FALSE) {
+
+  assertive::assert_is_logical(save_plot)
 
   # check inputs
   if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
@@ -483,21 +486,25 @@ plot_slice_histogram <- function(object = NULL, slices = NULL) {
     )
 
     # Save plot within the backfillz object
-    this_plot <- recordPlot()
+    this_plot <- grDevices::recordPlot()
     ID <- max(object@plot_history$ID + 1)
     saved_plot_items <- list(
       ID = ID,
       parameters = parameter,
+      time = date(),
+      type = 'Slice histgram',
       plot = this_plot
     )
 
-    # Append plot details to the backfillz object
-    object@plot_store <<- append(
-      object@plot_store,
-      list(
-        saved_plot_items
+    if(save_plot){
+      # Append plot details to the backfillz object
+      object@plot_store <<- append(
+        object@plot_store,
+        list(
+          saved_plot_items
+        )
       )
-    )
+    }
 
     return(object)
 
@@ -518,6 +525,7 @@ plot_slice_histogram <- function(object = NULL, slices = NULL) {
       Date = date(),
       Event = 'Slice Historgram',
       R_version = R.Version()$version.string,
+      Saved = save_plot,
       stringsAsFactors = FALSE
     )
   )

@@ -113,24 +113,25 @@ methods::setMethod(
     }
 
     message(cat('\nPlot history'))
+    print(object@plot_history)
 
-    if((nrow(object@df_slice_histogram) == 0) && (nrow(object@df_trace_dial) == 0) && (nrow(object@df_spiral_stream) == 0)){
-      message(cat('No plots run. Plot this object by passing it to plot_slice_histogram or plot_trace_dial'))
-    } else {
-      if (nrow(object@df_slice_histogram) > 0) {
-        message(cat('Slice histogram'))
-        print(object@df_slice_histogram)
-      }
-      if (nrow(object@df_trace_dial) > 0) {
-        message(cat('Trace dial'))
-        print(object@df_trace_dial)
-      }
-
-      if (nrow(object@df_spiral_stream) > 0) {
-        message(cat('Spiral stream'))
-        print(object@df_spiral_stream$parameter[1])
-      }
-    }
-
+    # if((nrow(object@df_slice_histogram) == 0) && (nrow(object@df_trace_dial) == 0) && (nrow(object@df_spiral_stream) == 0)){
+    #   message(cat('No plots run. Plot this object by passing it to plot_slice_histogram or plot_trace_dial'))
+    # } else {
+    #   if (nrow(object@df_slice_histogram) > 0) {
+    #     message(cat('Slice histogram'))
+    #     print(object@df_slice_histogram)
+    #   }
+    #   if (nrow(object@df_trace_dial) > 0) {
+    #     message(cat('Trace dial'))
+    #     print(object@df_trace_dial)
+    #   }
+    #
+    #   if (nrow(object@df_spiral_stream) > 0) {
+    #     message(cat('Spiral stream'))
+    #     print(object@df_spiral_stream$parameter[1])
+    #   }
+    # }
+    #
     }
   )

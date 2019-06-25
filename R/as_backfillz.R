@@ -11,7 +11,7 @@ as_backfillz <- function(object) {
 
   # populate backfillz object and set theme
   if (class(object) == 'stanfit') {
-    backfillz_object@mcmc_samples <- rstan::extract(object, permuted = FALSE)
+    backfillz_object@mcmc_samples <- rstan::extract(object, permuted = FALSE, inc_warmup = TRUE)
     backfillz_object@mcmc_model <- object@stanmodel@model_code
   } else if (class(object) == 'data.frame') {
     backfillz_object@mcmc_samples <- df_to_stanarray(object)
@@ -25,6 +25,7 @@ as_backfillz <- function(object) {
     Date = date(),
     Event = 'Object Creation',
     R_version = R.Version()$version.string,
+    Saved = FALSE,
     stringsAsFactors = FALSE
   )
 

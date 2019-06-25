@@ -4,7 +4,10 @@
 #' @param parameters        Vector of strings giving the parameters to plot (e.g., c('mu', 'sd')).
 #' @param n_bins            Number of bins displayed in histograms at end of dial.
 #' @param n_burnin          Number of burnin samples.
-plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 10) {
+#' @param save_plot         Set to TRUE to save plots in the Backfillz object.
+plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 10, save_plot = FALSE) {
+
+  assertive::assert_is_logical(save_plot)
 
   # check inputs
   if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
@@ -382,7 +385,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     ## draw histogram over top
     hist(
-      chains,
+      chains[1:n_burnin],
       axes = FALSE,
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
@@ -510,7 +513,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     ## draw histogram over top
     hist(
-      chains,
+      chains[n_burnin:n_samples],
       axes = FALSE,
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
@@ -573,21 +576,26 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     }
 
     # Save plot within the backfillz object
-    this_plot <- recordPlot()
+    this_plot <- grDevices::recordPlot()
     ID <- max(object@plot_history$ID + 1)
     saved_plot_items <- list(
       ID = ID,
+      time = date(),
+      type = 'Trace dial',
       parameters = parameter,
       plot = this_plot
     )
 
-    # Append plot details to the backfillz object
-    object@plot_store <<- append(
-      object@plot_store,
-      list(
-        saved_plot_items
+    if(save_plot) {
+      # Append plot details to the backfillz object
+      object@plot_store <<- append(
+        object@plot_store,
+        list(
+          saved_plot_items
+        )
       )
-    )
+
+    }
 
     # Save plot values in backfillz object
     object@df_trace_dial <<- rbind(
@@ -616,6 +624,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       Date = date(),
       Event = 'spiral_stream',
       R_version = R.Version()$version.string,
+      Saved = save_plot,
       stringsAsFactors = FALSE
     )
   )
