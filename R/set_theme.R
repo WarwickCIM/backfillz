@@ -91,6 +91,34 @@ set_theme <- function(backfillz_object, theme = 'default') {
       '#912B2F',
       '#7C6EAC'
     )
+  } else if (theme ==  'demo 2') {
+    message('Setting backfillz object theme to demo 2')
+    backfillz_object@theme_name               <- 'demo 2'
+    backfillz_object@theme_text_family        <-  'sans' #"Roboto" # "IBM Plex Mono" # "Bungee Shade" # "IBM Plex Sans Condensed"   # 'mono'
+    backfillz_object@theme_text_font          <-  1
+    backfillz_object@theme_text_font_colour   <- 'grey90'
+    
+    backfillz_object@theme_text_cex_title     <- 1.5
+    backfillz_object@theme_text_cex_main      <- 1
+    backfillz_object@theme_text_cex_axis      <- 0.6
+    
+    backfillz_object@theme_text_col_title     <- '#F2EEE7'
+    backfillz_object@theme_text_col_main      <- '#F2EEE7'
+    backfillz_object@theme_text_col_axis      <- '#F2EEE7'
+    
+    backfillz_object@theme_bg_colour          <- '#313C3F'
+    backfillz_object@theme_mg_colour          <- adjustcolor('#313C3F', red.f=1.8, green.f=1.8, blue.f=1.8 )
+    backfillz_object@theme_fg_colour          <- '#F2EEE7'
+    backfillz_object@theme_alpha              <- 0.8
+    backfillz_object@theme_palette            <- list(
+      '#EEE436',
+      '#00AEC7',
+      '#C73475',
+      '#7FC5D3',
+      '#7EB627',
+      '#F29530'
+    )
+    
 
   } else {
     message('Theme not specified so setting backfillz object theme to default')
