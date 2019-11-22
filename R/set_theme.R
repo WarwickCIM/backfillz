@@ -94,7 +94,7 @@ set_theme <- function(backfillz_object, theme = 'default') {
   } else if (theme ==  'demo 2') {
     message('Setting backfillz object theme to demo 2')
     backfillz_object@theme_name               <- 'demo 2'
-    backfillz_object@theme_text_family        <-  'sans' #"Roboto" # "IBM Plex Mono" # "Bungee Shade" # "IBM Plex Sans Condensed"   # 'mono'
+    backfillz_object@theme_text_family        <-  'sans' #"Roboto" # "IBM Plex Mono" # "Bungee Shade" # "IBM Plex Sans Condensed"   # 'mono' # names of useful google fonts
     backfillz_object@theme_text_font          <-  1
     backfillz_object@theme_text_font_colour   <- 'grey90'
     
