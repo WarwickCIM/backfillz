@@ -1,0 +1,21 @@
+template:
+  params:
+    bootswatch: flatly
+
+reference:
+- title: "Backfillz object"
+  desc: "Functions for and manipulating the backfillz object"
+- contents:
+  - as_backfillz
+  - set_theme
+- title: "Plotting"
+  desc: "Functions to creating or recalling plots"
+- contents:
+  - plot
+  - plot_slice_histogram
+  - plot_spiral_stream
+  - plot_trace_dial
+- title: "MCMC samples"
+  desc: "Functions for coercing MCMC samples"
+- contents:
+  - df_to_stanarray

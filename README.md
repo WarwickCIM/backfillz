@@ -1,6 +1,8 @@
-![](fig1.png)
-
+[![Build
+Status](https://travis-ci.org/warwickCIM/lecat.svg?branch=master)](https://travis-ci.org/WarwickCIM/backfillz)
 [![DOI](https://zenodo.org/badge/176701637.svg)](https://zenodo.org/badge/latestdoi/176701637)
+
+<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig1.png" width=100% alt=""/>
 
 # New View of MCMC
 
@@ -12,20 +14,16 @@ BackFillz.R slices and dices MCMC chains so increasingly parameter rich, complex
 ```r
 install.packages(devtools)
 devtools::install_github('warwickCIM/backfillz')
-require(backfillz)
+library(backfillz)
 
 # convert sample data to backfillz object
 x <- as_backfillz(sample_stanfit)
 
-slices <- data.frame(
-  parameters = c('mu', 'mu', 'eta[1]', 'eta[1]'),
-  lower = c(0,   0.6, 0.2, 0.7),
-  upper= c(0.4, 0.9, 0.25, 1),
-  stringsAsFactors = FALSE
-)
-
 # change theme
 x <- set_theme(x, 'demo 1')
+
+# plot via generic plot method
+x <- plot(x, plotType = 'slice_histogram')
 
 # create prototype plots
 x <- plot_slice_histogram(x, slices)
@@ -33,27 +31,25 @@ x <- plot_trace_dial(x)
 x <- plot_spiral_stream(x)
 ```
 
-# Current prototype
-
-In this first prototype we have implemented three new MCMC visual diagnostics. More functionality and tutorials to come! The documentation is available through R and the full package will be coming soon.
+# Current prototype plots
 
 ## Pretzel Plot – plot_trace_dial()
 
 This plot shows the chain and summary histograms in a format that can be easily arranged as a grid. The trace plot is stretched, clearly indicating ‘burn-in’, with density plots showing the burn-in and remainder of the chain in context. 
 
-![](fig2.png)
+<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig2.png" width=100% alt=""/>
 
 ## Slice plot - plot_slice_histogram()
 
 By partitioning chain slices, in a faceted view, users can assess chain convergence. The slices are currently specified by the user and display density plots for each slice. Have my chains converged? The slice plot offers a clear view of when and how convergence is achieved. Further statistical diagnostics can be embedded in these plots as colour encodings or additional layers and annotations.
 
-![](fig3.png)
+<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig3.png" width=100% alt=""/>
 
 ## Splash plot - plot_spiral_stream()
 
 Based on a Theodorus spiral, we turn MCMC chains into glyphs and extract properties to answer – What does ‘good mixing’ look like? In these plots variance windows are calculated across chains and parameters. The glyphs have clear diagnostic features and will allow gridded plots to investigate large numbers of parameters.
 
-![](fig4.png)
+<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig4.png" width=100% alt=""/>
 
 # Acknowledgements
 

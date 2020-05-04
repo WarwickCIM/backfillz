@@ -523,7 +523,7 @@ plot_slice_histogram <- function(object = NULL, slices = NULL, save_plot = FALSE
     data.frame(
       ID = ID,
       Date = date(),
-      Event = 'Slice Historgram',
+      Event = 'Slice Histogram',
       R_version = R.Version()$version.string,
       Saved = save_plot,
       stringsAsFactors = FALSE

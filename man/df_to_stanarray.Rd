@@ -2,7 +2,7 @@
 % Please edit documentation in R/df_to_stanarray.R
 \name{df_to_stanarray}
 \alias{df_to_stanarray}
-\title{Converts a data frame to the output structure of extract(stan_object, permuted = TRUE)}
+\title{Converts a data frame to the output structure of extract}
 \usage{
 df_to_stanarray(df)
 }
@@ -13,7 +13,7 @@ df_to_stanarray(df)
 An array from df with the dimensions [iteration, chain, parameters]
 }
 \description{
-Converts a data frame to the output structure of extract(stan_object, permuted = TRUE)
+Converts a data frame to the output structure of extract
 }
 \examples{
 df <- data.frame(

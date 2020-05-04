@@ -1,4 +1,4 @@
-#' Converts a data frame to the output structure of extract(stan_object, permuted = TRUE)
+#' Converts a data frame to the output structure of extract
 #'
 #' @param df                data frame with the column names 'parameters', 'iterations' and 'chains'
 #' @return                  An array from df with the dimensions [iteration, chain, parameters]

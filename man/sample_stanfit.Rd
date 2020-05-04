@@ -4,7 +4,9 @@
 \name{sample_stanfit}
 \alias{sample_stanfit}
 \title{Example stanfit object}
-\format{A stanfit object with 18 parameters, 3 chains, 10000 iterations and 500 warmup samples}
+\format{
+A stanfit object with 18 parameters, 3 chains, 10000 iterations and 500 warmup samples
+}
 \usage{
 sample_stanfit
 }

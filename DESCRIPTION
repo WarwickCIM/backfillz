@@ -1,7 +1,7 @@
 Package: backfillz
 Type: Package
 Title: MCMC visualisation package
-Version: 0.9.9900
+Version: 1.0
 Authors@R: c(
             person('James', 'Tripp', email = 'james.tripp@warwick.ac.uk', role = c('aut', 'cre')),
             person('Gregory', 'McInerny', email = 'G.McInerny@warwick.ac.uk', role = 'aut')
@@ -11,4 +11,4 @@ Description: Visualisation package for creating diagnostic plots for MCMC chains
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0

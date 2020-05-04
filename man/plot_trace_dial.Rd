@@ -4,8 +4,13 @@
 \alias{plot_trace_dial}
 \title{Creates a trace dial plot}
 \usage{
-plot_trace_dial(object, parameters = NULL, n_bins = 40,
-  n_burnin = 10, save_plot = FALSE)
+plot_trace_dial(
+  object,
+  parameters = NULL,
+  n_bins = 40,
+  n_burnin = 10,
+  save_plot = FALSE
+)
 }
 \arguments{
 \item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}

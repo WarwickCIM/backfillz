@@ -4,8 +4,14 @@
 \alias{plot_spiral_stream}
 \title{Creates a spiral steamgrapgh of MCMC chains}
 \usage{
-plot_spiral_stream(object = NULL, start_sample = NULL, steps = NULL,
-  parameters = NULL, laps = 4, save_plot = FALSE)
+plot_spiral_stream(
+  object = NULL,
+  start_sample = NULL,
+  steps = NULL,
+  parameters = NULL,
+  laps = 4,
+  save_plot = FALSE
+)
 }
 \arguments{
 \item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}

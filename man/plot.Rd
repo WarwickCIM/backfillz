@@ -3,6 +3,9 @@
 \name{plot}
 \alias{plot}
 \title{Plot method for the backfillz method}
+\usage{
+\S4method{plot}{Backfillz,missing}(x, y, ...)
+}
 \arguments{
 \item{x}{Backfillz object}
 
