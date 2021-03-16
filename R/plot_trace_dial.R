@@ -470,7 +470,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       0.5 + (1/3) * (0.5 - border),
       1 - border,
       0.5 + 0.5 * (1 - border - 0.5),
-      1 - border
+      1 - border 
       ),
       new = TRUE,
       family = object@theme_text_family,
