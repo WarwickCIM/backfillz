@@ -3,12 +3,15 @@ Type: Package
 Title: MCMC visualisation package
 Version: 1.0
 Authors@R: c(
-            person('James', 'Tripp', email = 'james.tripp@warwick.ac.uk', role = c('aut', 'cre')),
-            person('Gregory', 'McInerny', email = 'G.McInerny@warwick.ac.uk', role = 'aut')
-            )
+    person("James", "Tripp", , "james.tripp@warwick.ac.uk",
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0003-2471-3411")),
+    person("Gregory", "McInerny", , role = "aut"))
 Depends: R (>= 2.10), assertive, methods, scales, coda, rstan
 Description: Visualisation package for creating diagnostic plots for MCMC chains.
-License: GPL-3
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+URL: https://github.com/warwickCIM/backfillz
+BugReports: https://github.com/warwickCIM/backfillz/issues

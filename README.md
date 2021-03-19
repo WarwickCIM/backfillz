@@ -1,6 +1,12 @@
-[![Build
-Status](https://travis-ci.org/warwickCIM/lecat.svg?branch=master)](https://travis-ci.org/WarwickCIM/backfillz)
-[![DOI](https://zenodo.org/badge/176701637.svg)](https://zenodo.org/badge/latestdoi/176701637)
+<!-- badges: start -->
+
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![R-CMD-check](https://github.com/WarwickCIM/backfillz/workflows/R-CMD-check/badge.svg)](https://github.com/WarwickCIM/backfillz/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/WarwickCIM/backfillz/branch/master/graph/badge.svg)](https://codecov.io/gh/WarwickCIM/backfillz?branch=master)
+<!-- badges: end -->
 
 <img src="https://github.com/WarwickCIM/backfillz/raw/master/fig1.png" width=100% alt=""/>
 

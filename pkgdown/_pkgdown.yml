@@ -1,3 +1,9 @@
+authors:
+  James Tripp:
+    href: https://warwick.ac.uk/jamestripp
+  Gregory McInerny:
+    href: https://warwick.ac.uk/fac/cross_fac/cim/people/greg-mcinerny/
+
 template:
   params:
     bootswatch: flatly

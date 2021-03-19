@@ -1,0 +1,132 @@
+{
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "backfillz",
+  "description": "Visualisation package for creating diagnostic plots for MCMC chains.",
+  "name": "backfillz: MCMC visualisation package",
+  "codeRepository": "https://github.com/warwickCIM/backfillz",
+  "issueTracker": "https://github.com/warwickCIM/backfillz/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "1.0",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.0.4 (2021-02-15)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "James",
+      "familyName": "Tripp",
+      "email": "james.tripp@warwick.ac.uk",
+      "@id": "https://orcid.org/0000-0003-2471-3411"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Gregory",
+      "familyName": "McInerny"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "James",
+      "familyName": "Tripp",
+      "email": "james.tripp@warwick.ac.uk",
+      "@id": "https://orcid.org/0000-0003-2471-3411"
+    }
+  ],
+  "softwareSuggestions": [],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 2.10"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "assertive",
+      "name": "assertive",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=assertive"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "scales",
+      "name": "scales",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=scales"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "coda",
+      "name": "coda",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=coda"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rstan",
+      "name": "rstan",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rstan"
+    }
+  ],
+  "releaseNotes": "https://github.com/warwickCIM/backfillz/blob/master/NEWS.md",
+  "readme": "https://github.com/WarwickCIM/backfillz/blob/master/README.md",
+  "fileSize": "6257.597KB",
+  "contIntegration": "https://codecov.io/gh/WarwickCIM/backfillz?branch=master",
+  "developmentStatus": "https://www.repostatus.org/#wip",
+  "citation": [
+    {
+      "@type": "SoftwareSourceCode",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "James",
+          "familyName": "Tripp",
+          "email": "james.tripp@warwick.ac.uk",
+          "@id": "https://orcid.org/0000-0003-2471-3411"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Gregory",
+          "familyName": "McInerny"
+        }
+      ],
+      "name": "backfillz: MCMC visualisation package",
+      "url": "https://github.com/warwickCIM/backfillz",
+      "description": "R package version 1.0"
+    }
+  ]
+}
