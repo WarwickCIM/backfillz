@@ -49,13 +49,6 @@ Backfillz <- methods::setClass("Backfillz",
                                  )
                                )
 
-
-#' Plot method for the backfillz method
-#'
-#' @aliases plot
-#' @name  plot
-#' @param x             Backfillz object
-#' @param PlotType      Type of plot to create. Either 'slice_histogram', 'trace_dial' or 'spiral_stream'. Defaults to 'slice_histogram'.
 methods::setMethod(
   f = "plot",
   signature = c(x = "Backfillz", y = 'missing'),

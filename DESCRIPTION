@@ -11,4 +11,4 @@ Description: Visualisation package for creating diagnostic plots for MCMC chains
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
