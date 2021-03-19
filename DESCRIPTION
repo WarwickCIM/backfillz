@@ -7,7 +7,7 @@ Authors@R: c(
     role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-2471-3411")),
     person("Gregory", "McInerny", , role = "aut"))
-Depends: R (>= 2.10), assertive, methods, scales, coda, rstan
+Depends: R (>= 2.10), assertive, methods, scales, coda, rstan, testthat
 Description: Visualisation package for creating diagnostic plots for MCMC chains.
 License: MIT + file LICENSE
 Encoding: UTF-8

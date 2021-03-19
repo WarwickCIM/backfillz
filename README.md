@@ -2,8 +2,7 @@
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/WarwickCIM/backfillz/workflows/R-CMD-check/badge.svg)](https://github.com/WarwickCIM/backfillz/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/WarwickCIM/backfillz/branch/master/graph/badge.svg)](https://codecov.io/gh/WarwickCIM/backfillz?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 <img src="https://github.com/WarwickCIM/backfillz/raw/master/fig1.png" width=100% alt=""/>
