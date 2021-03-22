@@ -1,40 +1,52 @@
 #' Creates a trace dial plot
 #'
-#' @param object            Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.
-#' @param parameters        Vector of strings giving the parameters to plot (e.g., c('mu', 'sd')).
-#' @param n_bins            Number of bins displayed in histograms at end of dial.
+#' @param object            Backfillz or Stanfit object. Stanfit objects
+#'  are converted to Backfillz object using the as_backfillz function.
+#' @param parameters        Vector of strings giving the parameters to
+#'  plot (e.g., c('mu', 'sd')).
+#' @param n_bins            Number of bins displayed in histograms
+#'  at end of dial.
 #' @param n_burnin          Number of burnin samples.
 #' @param save_plot         Set to TRUE to save plots in the Backfillz object.
-plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 10, save_plot = FALSE) {
+plot_trace_dial <- function(
+  object,
+  parameters = NULL,
+  n_bins = 40,
+  n_burnin = 10,
+  save_plot = FALSE) {
 
   assertive::assert_is_logical(save_plot)
 
   # check inputs
-  if(!class(object) == 'stanfit' & !class(object) == 'Backfillz' & !class(object) == 'data.frame'){
-    stop('Object is not a stanfit, Backfillz or data frame object')
+  if (
+    !class(object) == "stanfit"
+     & !class(object) == "backfillz"
+      & !class(object) == "data.frame") {
+    stop("Object is not a stanfit, Backfillz or data frame object")
   }
 
   assertive::assert_is_numeric(n_bins)
   assertive::assert_is_numeric(n_burnin)
 
   # convert stanfit
-  if((class(object) == 'stanfit') | (class(object) == 'data.frame')) {
+  if ((class(object) == "stanfit") | (class(object) == "data.frame")) {
     object <- as_backfillz(object)
   }
-
 
   # Preallocate the data frame stored in the backfillz object
   object@df_trace_dial <- data.frame(
     parameter = character(),
     sample_min = numeric(),
-    sample_max= numeric(),
+    sample_max = numeric(),
     stringsAsFactors = FALSE
   )
 
   # assign default of first 2 parameters if parameters are not specified
-  if(is.null(parameters)) {
-    message('No parameters specified. Plotting the first two model parameters.')
-    parameters <- as.array(attributes(object@mcmc_samples)$dimnames$parameters)[1:2]
+  if (is.null(parameters)) {
+    message(paste0("No parameters specified. ",
+    "Plotting the first two model parameters."))
+    parameters <-
+     as.array(attributes(object@mcmc_samples)$dimnames$parameters)[1:2]
   }
 
   # extract theme properties
@@ -47,7 +59,6 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
   colour_remaining_segment      <- alpha(colour = object@theme_mg_colour,
                                          alpha = (object@theme_alpha - 0.3))
 
-
   create_single_plot <- function(parameter) {
     # Makes plot of samples for a single parameter
     #
@@ -59,17 +70,11 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     # Returns:
     #           updated backfillaz object
     #           MCMC trace dial plot for a single parameter to the plot device
-    # switch(Sys.info()['sysname'],
-    #        Darwin = quartz(),
-    #        dev.new()
-    # )
 
-    #dev.new()
-
-    message(paste('Plotting parameter:', parameter))
+    message(paste("Plotting parameter:", parameter))
 
     # Extract sample parameters
-    chains <- object@mcmc_samples[,,parameter]
+    chains <- object@mcmc_samples[, , parameter]
     n_samples <- dim(chains)[1]
     n_chains <- dim(chains)[2]
     max_sample <- max(chains)
@@ -81,35 +86,39 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     x_positions <- cos(positions)
 
     # scaling function
-    scale_0_1 <- function(x) { (x - min(x)) / max(x) }
+    scale_0_1 <- function(x) {
+      (x - min(x)) / max(x)
+      }
 
     # apply scale function to each chain
     chains_0_1 <- apply(X = chains, MARGIN = 2, FUN = scale_0_1)
 
-    # whole circle positions
-    full_x_positions <- x_positions * chains_0_1
-    full_y_positions <- y_positions * chains_0_1
-
     # donut circle positions
-    chains_donut <- (chains_0_1 * (2/3)) + 1/3
+    chains_donut <- (chains_0_1 * (2 / 3)) + 1 / 3
     donut_x_positions <- x_positions * chains_donut
     donut_y_positions <- y_positions * chains_donut
 
     # polygon positions
     burnin_polygon_positions <- list(
       inner = list(
-        x = c(x_positions[1:n_burnin] * (1/3), rev(x_positions[1:n_burnin] * (2/3))),
-        y = c(y_positions[1:n_burnin] * (1/3), rev(y_positions[1:n_burnin] * (2/3)))
+        x = c(x_positions[1:n_burnin] *
+         (1 / 3), rev(x_positions[1:n_burnin] * (2 / 3))),
+        y = c(y_positions[1:n_burnin] *
+         (1 / 3), rev(y_positions[1:n_burnin] * (2 / 3)))
       ),
       outer = list(
-        x = c(x_positions[1:n_burnin] * (2/3), rev(x_positions[1:n_burnin] * (3/3))),
-        y = c(y_positions[1:n_burnin] * (2/3), rev(y_positions[1:n_burnin] * (3/3)))
+        x = c(x_positions[1:n_burnin] *
+         (2 / 3), rev(x_positions[1:n_burnin] * (3 / 3))),
+        y = c(y_positions[1:n_burnin] *
+         (2 / 3), rev(y_positions[1:n_burnin] * (3 / 3)))
       )
     )
 
     remaining_polygon_positions <- list(
-      x = c(x_positions[n_burnin:n_samples] * (1/3), rev(x_positions[n_burnin:n_samples] * 1)),
-      y = c(y_positions[n_burnin:n_samples] * (1/3), rev(y_positions[n_burnin:n_samples] * 1))
+      x = c(x_positions[n_burnin:n_samples] *
+       (1 / 3), rev(x_positions[n_burnin:n_samples] * 1)),
+      y = c(y_positions[n_burnin:n_samples] *
+       (1 / 3), rev(y_positions[n_burnin:n_samples] * 1))
     )
 
     # set up
@@ -121,18 +130,18 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
         col.lab = object@theme_text_font_colour,
         col.axis = object@theme_text_font_colour)
 
-    par(mar=c(0, 0, 0, 0))
+    par(mar = c(0, 0, 0, 0))
 
     # base plot
     plot(
       x_positions,
       y_positions,
-      type = 'n',
+      type = "n",
       axes = FALSE,
       xlim = c(-1, 1),
       ylim = c(-1, 1),
-      xaxs="i",
-      yaxs="i"
+      xaxs = "i",
+      yaxs = "i"
       )
 
     text(0, 0, parameter, col = colour_guide_lines)
@@ -142,9 +151,9 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     # bottom right
     mtext(
       at = 1,
-      text = 'BackFillz.R by CIM, University of Warwick',
+      text = "BackFillz.R by CIM, University of Warwick",
       side = 1,
-      cex = object@theme_text_cex_axis ,
+      cex = object@theme_text_cex_axis,
       col = object@theme_text_col_axis,
       adj = 1
     )
@@ -152,9 +161,9 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     # top left
     mtext(
       at = -0.4,
-      text = 'Spiral plot',
+      text = "Spiral plot",
       side = 3,
-      cex = object@theme_text_cex_axis ,
+      cex = object@theme_text_cex_axis,
       col = object@theme_text_col_axis,
       adj = 1
     )
@@ -166,21 +175,21 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       burnin_polygon_positions$inner$x,
       burnin_polygon_positions$inner$y,
       col = colour_inner_burn_segment,
-      border = 'white'
+      border = "white"
     )
 
     polygon(
       burnin_polygon_positions$outer$x,
       burnin_polygon_positions$outer$y,
       col = colour_outer_burn_segment,
-      border = 'white'
+      border = "white"
     )
 
     polygon(
       remaining_polygon_positions$x,
       remaining_polygon_positions$y,
       col = colour_remaining_segment,
-      border = 'white'
+      border = "white"
     )
 
     # labels
@@ -188,14 +197,14 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     # start of sample label
     segments(0, 0.25, 0, axoutr, col = colour_guide_lines, lwd = 1)
-    text(0, 0.28, labels = '0', pos = 1, cex = 0.6, col = colour_guide_lines)
+    text(0, 0.28, labels = "0", pos = 1, cex = 0.6, col = colour_guide_lines)
 
     # burnin label
     segments(
       x_positions[n_burnin] * 0.22,
       y_positions[n_burnin] * 0.22,
       x_positions[n_burnin] * axoutr,
-      y_positions[n_burnin] * (1/3),
+      y_positions[n_burnin] * (1 / 3),
       col = colour_guide_lines,
       lwd = 1
     )
@@ -213,10 +222,10 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     # end of sample label
     segments(
-      x_positions[n_samples] * (1/4),
-      y_positions[n_samples] * (1/4),
+      x_positions[n_samples] * (1 / 4),
+      y_positions[n_samples] * (1 / 4),
       x_positions[n_samples] * axoutr,
-      y_positions[n_samples] * (1/3),
+      y_positions[n_samples] * (1 / 3),
       col = colour_guide_lines,
       lwd = 1
     )
@@ -253,8 +262,8 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     )
 
     lines(
-      x_positions[n_burnin:n_samples] * (2/3),
-      y_positions[n_burnin:n_samples] * (2/3),
+      x_positions[n_burnin:n_samples] * (2 / 3),
+      y_positions[n_burnin:n_samples] * (2 / 3),
       col = colour_guide_lines
     )
 
@@ -280,7 +289,8 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     }
 
     # chain start axis
-    par(fig = c(0.49, 0.5, 0.5 + (1/3) * (0.5 - border), 1 - border), new = TRUE,
+    par(fig = c(0.49, 0.5, 0.5 + (1 / 3) *
+     (0.5 - border), 1 - border), new = TRUE,
         family = object@theme_text_family,
         font = object@theme_text_font,
         col.lab = object@theme_text_font_colour,
@@ -290,16 +300,16 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     plot(
       -99, -99,
-      type = 'n',
+      type = "n",
       axes = FALSE,
       ylim = c(max_sample, min_sample),
-      yaxs = 'i'
+      yaxs = "i"
       )
 
     ## burnin axis
     axis(
       4,
-      cex.axis= 0.5,
+      cex.axis = 0.5,
       las = 1,
       col.axis = colour_guide_lines,
       col = colour_guide_lines
@@ -307,7 +317,9 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     axis(
       4,
-      at = seq(floor(min_sample - 0.1 * min_sample), max_sample + 0.1 * max_sample, by = 1),
+      at = seq(
+        floor(min_sample - 0.1 * min_sample),
+         max_sample + 0.1 * max_sample, by = 1),
       labels = FALSE,
       cex.axis = 0.5,
       las = 1,
@@ -317,7 +329,10 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       )
 
     # Calculate burnin and remaining sample histogram properties
-    histogram_breaks <- c(seq(floor(min_sample), ceiling(max_sample), length = (n_bins + 1)))
+    histogram_breaks <- c(
+      seq(floor(min_sample),
+       ceiling(max_sample),
+        length = (n_bins + 1)))
 
     hist_create <- function(x) {
       hist(
@@ -340,7 +355,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     # draw histograms
     par(
       fig = c(
-        0.5 + (1/3) * (0.5 - border),
+        0.5 + (1 / 3) * (0.5 - border),
         1 - border,
         0.5,
         0.5 + 0.5 * (1 - border - 0.5)),
@@ -358,27 +373,27 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       -99,
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
-      xaxs = 'i',
+      xaxs = "i",
       axes = FALSE,
-      type = 'n'
+      type = "n"
     )
 
     # histogram label
     mtext(
       at = histograms_max_density,
-      text = 'Burn-in histrogram',
+      text = "Burn-in histrogram",
       side = 2,
-      cex = object@theme_text_cex_axis ,
+      cex = object@theme_text_cex_axis,
       col = object@theme_text_col_axis,
       adj = 1
     )
 
     ## histogram background block
     rect(
-      par('usr')[1],
-      par('usr')[3],
-      par('usr')[2],
-      par('usr')[4],
+      par("usr")[1],
+      par("usr")[3],
+      par("usr")[2],
+      par("usr")[4],
       col = colour_outer_burn_segment,
       border = FALSE
     )
@@ -390,12 +405,12 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
       breaks = histogram_breaks,
-      main = '',
-      col = 'white',
+      main = "",
+      col = "white",
       border = colour_outer_burn_segment,
       prob = TRUE,
       add = TRUE,
-      xaxs = 'i'
+      xaxs = "i"
     )
 
     ## add histogram xes
@@ -415,7 +430,7 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       tck = 0
       )
 
-    plot_histogram_lines <- function(histogram, colour = 'black') {
+    plot_histogram_lines <- function(histogram, colour = "black") {
       # Plots lines on a histogram following histogram densities
       #
       # Args:
@@ -426,8 +441,8 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
       # check inputs
       assertive::assert_is_character(colour)
-      if(!class(histogram) == 'histogram') {
-        warning('Non histogram passed to plot_histogram_lines function')
+      if (!class(histogram) == "histogram") {
+        warning("Non histogram passed to plot_histogram_lines function")
       }
 
       # preallocate x and y sequence vectors
@@ -461,16 +476,17 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
         breaks = histogram_breaks,
         plot = FALSE
       )
-      plot_histogram_lines(histogram_3, alpha(colour = object@theme_palette[[i]],
-                                              alpha = 0.7))
+      plot_histogram_lines(histogram_3,
+       alpha(colour = object@theme_palette[[i]],
+        alpha = 0.7))
     }
 
     ## add remaining sample histogram
     par(fig = c(
-      0.5 + (1/3) * (0.5 - border),
+      0.5 + (1 / 3) * (0.5 - border),
       1 - border,
       0.5 + 0.5 * (1 - border - 0.5),
-      1 - border 
+      1 - border
       ),
       new = TRUE,
       family = object@theme_text_family,
@@ -486,17 +502,17 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       -99,
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
-      xaxs = 'i',
+      xaxs = "i",
       axes = FALSE,
-      type = 'n'
+      type = "n"
     )
 
     ## histogram background block
     rect(
-      par('usr')[1],
-      par('usr')[3],
-      par('usr')[2],
-      par('usr')[4],
+      par("usr")[1],
+      par("usr")[3],
+      par("usr")[2],
+      par("usr")[4],
       col = colour_remaining_segment,
       border = FALSE
     )
@@ -504,9 +520,9 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
     # histogram label
     mtext(
       at = histograms_max_density,
-      text = 'Sample histrogram',
+      text = "Sample histrogram",
       side = 2,
-      cex = object@theme_text_cex_axis ,
+      cex = object@theme_text_cex_axis,
       col = object@theme_text_col_axis,
       adj = 1
     )
@@ -518,12 +534,12 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
       xlim = c(min_sample, max_sample),
       ylim = c(0, histograms_max_density),
       breaks = histogram_breaks,
-      main = '',
-      col = 'white',
+      main = "",
+      col = "white",
       border = colour_remaining_segment,
       prob = TRUE,
       add = TRUE,
-      xaxs = 'i'
+      xaxs = "i"
     )
 
     ## add axis
@@ -577,16 +593,16 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
     # Save plot within the backfillz object
     this_plot <- grDevices::recordPlot()
-    ID <- max(object@plot_history$ID + 1)
+    id <- max(object@plot_history$ID + 1)
     saved_plot_items <- list(
-      ID = ID,
+      ID = id,
       time = date(),
-      type = 'Trace dial',
+      type = "Trace dial",
       parameters = parameter,
       plot = this_plot
     )
 
-    if(save_plot) {
+    if (save_plot) {
       # Append plot details to the backfillz object
       object@plot_store <<- append(
         object@plot_store,
@@ -614,15 +630,15 @@ plot_trace_dial <- function(object, parameters = NULL, n_bins = 40, n_burnin = 1
 
   apply(X = parameters, FUN = create_single_plot, MARGIN = 1)
 
-  ID <- max(object@plot_history$ID + 1)
+  id <- max(object@plot_history$ID + 1)
 
   # Update log
   object@plot_history <- rbind(
     object@plot_history,
     data.frame(
-      ID = ID,
+      ID = id,
       Date = date(),
-      Event = 'spiral_stream',
+      Event = "spiral_stream",
       R_version = R.Version()$version.string,
       Saved = save_plot,
       stringsAsFactors = FALSE

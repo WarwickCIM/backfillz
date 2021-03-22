@@ -1,7 +1,9 @@
 #' Converts a data frame to the output structure of extract
 #'
-#' @param df                data frame with the column names 'parameters', 'iterations' and 'chains'
-#' @return                  An array from df with the dimensions [iteration, chain, parameters]
+#' @param df  data frame with the column names
+#'  'parameters', 'iterations' and 'chains'
+#' @return    An array from df with the
+#'  dimensions [iteration, chain, parameters]
 #' @examples
 #' df <- data.frame(
 #'               parameters = c('mu', 'mu'),
@@ -19,10 +21,14 @@ df_to_stanarray <- function(df) {
   assertive::assert_is_numeric(df$chains)
 
   # Sort dataframe alphabetically by parameters then numerically by chain
-  df <- df[order(df$parameters, df$chains),]
+  df <- df[order(df$parameters, df$chains), ]
 
   # Get properties of sample
-  n_iterations <- length(df$iterations[df$parameters == df$parameters[1] & df$chains == df$chains[1]])
+  n_iterations <- length(
+    df$iterations[
+      df$parameters == df$parameters[1] & df$chains == df$chains[1]
+      ])
+
   chain_names <- unique(df$chains)
   n_chains <- length(chain_names)
   parameter_names  <- unique(df$parameters)
@@ -34,9 +40,8 @@ df_to_stanarray <- function(df) {
     dim = c(n_iterations, n_chains, n_parameters),
     dimnames = list(
       iterations = NULL,
-      chains = paste('chain:', chain_names, sep = ''),
+      chains = paste("chain:", chain_names, sep = ""),
       parameters = parameter_names
     )
   )
 }
-

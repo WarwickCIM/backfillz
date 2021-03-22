@@ -26,10 +26,10 @@ x <- as_backfillz(sample_stanfit)
 x <- set_theme(x, 'demo 1')
 
 # plot via generic plot method
-x <- plot(x, plotType = 'slice_histogram')
+x <- plot(x, plot_type = 'slice_histogram')
 
 # create prototype plots
-x <- plot_slice_histogram(x, slices)
+x <- plot_slice_histogram(x)
 x <- plot_trace_dial(x)
 x <- plot_spiral_stream(x)
 ```
