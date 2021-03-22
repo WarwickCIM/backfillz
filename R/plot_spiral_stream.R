@@ -52,37 +52,37 @@ plot_spiral_stream <- function(
       attributes(object@mcmc_samples)$dimnames$parameters)[1:2]
   }
 
-  equi_spi <- function(npnts, laps = 5, innr = 1, otr = 0.05) {
+  equi_spi <- function(n_points, laps = 5, innr = 1, otr = 0.05) {
 
-    rng <- ((1 + otr) * npnts)^0.5
-    lapWdth <- rng / laps
+    rng <- ((1 + otr) * n_points)^0.5
+    lap_width <- rng / laps
 
     # calculate length and take away inner spiral (clarkson equation)
-    lspi <-  pi * lapWdth * laps^2 - pi * lapWdth * innr^2
+    lspi <-  pi * lap_width * laps^2 - pi * lap_width * innr^2
 
     #calculate spiral arc length for the 1st step
-    alngth <- (lspi / npnts)
+    arc_length <- (lspi / n_points)
 
     #assume it approximates a circle and calculate chord length
-    thet <- alngth / rng
-    dst <-  rng * sin(thet)
+    theta <- arc_length / rng
+    distance <-  rng * sin(theta)
 
     deg1 <- 0.5 * pi # start angle ( 12 o"clock )
 
-    x2 <- rep(-99, npnts)
-    y2 <- rep(-99, npnts)
-    hs <- rep(-99, npnts)
-    deg <- rep(-99, npnts)
-    degsum <- rep(-99, npnts)
+    x2 <- rep(-99, n_points)
+    y2 <- rep(-99, n_points)
+    hs <- rep(-99, n_points)
+    deg <- rep(-99, n_points)
+    degsum <- rep(-99, n_points)
     i2 <- 0
 
-    upVal <- round((1 + otr) * npnts, digits = 0)
-    loVal <- upVal - npnts + 1
+    upper_value <- round((1 + otr) * n_points, digits = 0)
+    lower_value <- upper_value - n_points + 1
 
-    for (i in upVal:loVal) {
+    for (i in upper_value:lower_value) {
 
       h <- i^0.5
-      deg0 <- atan(dst / h)
+      deg0 <- atan(distance / h)
       deg1 <- deg1 - deg0
       x1 <- h * cos(deg1)
       y1 <- h * sin(deg1)
@@ -101,10 +101,10 @@ plot_spiral_stream <- function(
     y3 <- y2 / rng
     hs <- hs / rng
 
-    sPnts <- cbind(x3, y3, hs, deg, degsum)
-    sPnts <- as.data.frame(sPnts)
-    names(sPnts) <- c("spX", "spY", "h", "deg", "degsum")
-    sPnts
+    spiral_points <- cbind(x3, y3, hs, deg, degsum)
+    spiral_points <- as.data.frame(spiral_points)
+    names(spiral_points) <- c("spX", "spY", "h", "deg", "degsum")
+    spiral_points
 
   }
 
@@ -161,23 +161,24 @@ plot_spiral_stream <- function(
       names(vrsa) <- c("vl")
       vrsa <- as.data.frame(vrsa)
 
-      vrsb <- vrsa - min(vrsa, na.rm = F)
-      vrsb <- vrsb / max(vrsb, na.rm = F)
+      vrsb <- vrsa - min(vrsa, na.rm = FALSE)
+      vrsb <- vrsb / max(vrsb, na.rm = FALSE)
       vrsb <- lap_width * vrsb
 
-      es <- equi_spi(npnts = n, laps = laps, innr = inner)
+      es <- equi_spi(n_points = n, laps = laps, innr = inner)
       spi <- es$degsum
-      Yspi <- sin(spi)
-      Xspi <- cos(spi)
+      y_spiral <- sin(spi)
+      x_spiral <- cos(spi)
 
       # create spiral by multiplying by 1
-      Dspi5 <- es$h + vrsb$vl
-      Dspi6 <- es$h - vrsb$vl
+      spiral_degree_1 <- es$h + vrsb$vl
+      spiral_degree_2 <- es$h - vrsb$vl
 
-      Xral5 <- Xspi * Dspi5
-      Yral5 <- Yspi * Dspi5
-      Xral6 <- Xspi * Dspi6
-      Yral6 <- Yspi * Dspi6
+      # create x and y spiral coordinates
+      x_radius_length_1 <- x_spiral * spiral_degree_1
+      y_radius_length_1 <- y_spiral * spiral_degree_1
+      x_radius_length_2 <- x_spiral * spiral_degree_2
+      y_radius_length_2 <- y_spiral * spiral_degree_2
 
       # Create plot space
       plot(
@@ -195,8 +196,8 @@ plot_spiral_stream <- function(
 
       # Plot spiral
       polygon(
-        c(Xral5, rev(Xral6)),
-        c(Yral5, rev(Yral6)),
+        c(x_radius_length_1, rev(x_radius_length_2)),
+        c(y_radius_length_1, rev(y_radius_length_2)),
         col = object@theme_palette[[chain_number]],
         border = FALSE
       )
