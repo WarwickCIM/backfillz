@@ -7,10 +7,12 @@
 df_to_stanarray(df)
 }
 \arguments{
-\item{df}{data frame with the column names 'parameters', 'iterations' and 'chains'}
+\item{df}{data frame with the column names
+'parameters', 'iterations' and 'chains'}
 }
 \value{
-An array from df with the dimensions [iteration, chain, parameters]
+An array from df with the
+ dimensions [iteration, chain, parameters]
 }
 \description{
 Converts a data frame to the output structure of extract

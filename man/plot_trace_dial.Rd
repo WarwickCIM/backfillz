@@ -13,11 +13,14 @@ plot_trace_dial(
 )
 }
 \arguments{
-\item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}
+\item{object}{Backfillz or Stanfit object. Stanfit objects
+are converted to Backfillz object using the as_backfillz function.}
 
-\item{parameters}{Vector of strings giving the parameters to plot (e.g., c('mu', 'sd')).}
+\item{parameters}{Vector of strings giving the parameters to
+plot (e.g., c('mu', 'sd')).}
 
-\item{n_bins}{Number of bins displayed in histograms at end of dial.}
+\item{n_bins}{Number of bins displayed in histograms
+at end of dial.}
 
 \item{n_burnin}{Number of burnin samples.}
 

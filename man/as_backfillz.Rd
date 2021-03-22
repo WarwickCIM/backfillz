@@ -7,7 +7,8 @@
 as_backfillz(object)
 }
 \arguments{
-\item{object}{Stanfit or dataframe. Dataframe must contain columns 'parameters', 'iterations' and 'chains'.}
+\item{object}{Stanfit or dataframe.
+Dataframe must contain columns 'parameters', 'iterations' and 'chains'.}
 }
 \description{
 Convert stanFit object to a Backfillz object

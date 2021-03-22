@@ -9,7 +9,8 @@ set_theme(backfillz_object, theme = "default")
 \arguments{
 \item{backfillz_object}{Backfillz object}
 
-\item{theme}{Character specifying theme (e.g., 'default', 'solarized_dark')}
+\item{theme}{Character specifying theme
+(e.g., 'default', 'solarized_dark')}
 }
 \description{
 Set graphical plot slots of a backfillz object to a theme

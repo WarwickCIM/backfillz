@@ -14,13 +14,16 @@ plot_spiral_stream(
 )
 }
 \arguments{
-\item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}
+\item{object}{Backfillz or Stanfit object. Stanfit objects
+are converted to Backfillz object using the as_backfillz function.}
 
 \item{start_sample}{Chain position to start the spirals.}
 
-\item{steps}{Vector of step increments for each spiral within chain. Defaults to 25 percent of sample for 4 steps.}
+\item{steps}{Vector of step increments for each spiral
+within chain. Defaults to 25 percent of sample for 4 steps.}
 
-\item{parameters}{Vector of parameters to plot. Defaults to two parameters.}
+\item{parameters}{Vector of parameters to plot. Defaults to
+two parameters.}
 
 \item{laps}{Number of laps for the spitals. Defaults to 4.}
 

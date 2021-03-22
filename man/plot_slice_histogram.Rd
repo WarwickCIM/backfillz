@@ -7,11 +7,15 @@
 plot_slice_histogram(object = NULL, slices = NULL, save_plot = FALSE)
 }
 \arguments{
-\item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}
+\item{object}{Backfillz or Stanfit object.
+Stanfit objects are converted to Backfillz object
+using the as_backfillz function.}
 
-\item{slices}{Dataframe giving the cut off points for the trace histograms and parameters to show.}
+\item{slices}{Dataframe giving the cut
+off points for the trace histograms and parameters to show.}
 
-\item{save_plot}{Set to TRUE to save plots in the Backfillz object.}
+\item{save_plot}{Set to TRUE to save plots
+in the Backfillz object.}
 }
 \description{
 Creates a slice histogram of MCMC chains

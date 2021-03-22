@@ -2,15 +2,19 @@
 % Please edit documentation in R/recall_plots.R
 \name{recall_plots}
 \alias{recall_plots}
-\title{Recall a series of plots from the backfillz object using the ID from the summary() function}
+\title{Recall a series of plots from the backfillz object using
+ the ID from the summary() function}
 \usage{
-recall_plots(object, ID = NULL)
+recall_plots(object, id = NULL)
 }
 \arguments{
-\item{object}{Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.}
+\item{object}{Backfillz or Stanfit object. Stanfit
+objects are converted to Backfillz object using the as_backfillz function.}
 
-\item{ID}{Vector of strings giving the parameters to plot (e.g., c('mu', 'sd')).}
+\item{id}{Vector of strings giving the
+parameters to plot (e.g., c('mu', 'sd')).}
 }
 \description{
-Recall a series of plots from the backfillz object using the ID from the summary() function
+Recall a series of plots from the backfillz object using
+ the ID from the summary() function
 }
