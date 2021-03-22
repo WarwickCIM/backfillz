@@ -13,7 +13,7 @@ recall_plots <- function(object, id = NULL) {
   }
 
   assertive::assert_is_s4(object)
-  assertive::assert_is_numeric(ID)
+  assertive::assert_is_numeric(id)
 
   # plot plots corresponding to id
   found <- 0
