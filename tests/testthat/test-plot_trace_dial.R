@@ -1,4 +1,7 @@
 test_that("trace dial plot is correctly generated", {
+    old_warning_level <- getOption("warn")
+    options(warn = -1)
+
     library(backfillz)
     library(tools)
 

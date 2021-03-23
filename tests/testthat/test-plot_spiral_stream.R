@@ -1,4 +1,7 @@
 test_that("spiral stream plot is correctly generated", {
+    old_warning_level <- getOption("warn")
+    options(warn = -1)
+
     library(backfillz)
     library(tools)
 
@@ -8,6 +11,8 @@ test_that("spiral stream plot is correctly generated", {
      fonts = c("sans", "Palatino"))
     x <- plot_spiral_stream(x, verbose = FALSE)
     dev.off()
+
+    options(warn = old_warning_level)
 
     # compare md5sums of file
     # ps files are plain text
