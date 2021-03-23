@@ -7,10 +7,12 @@
 #'  off points for the trace histograms and parameters to show.
 #' @param save_plot         Set to TRUE to save plots
 #'  in the Backfillz object.
+#' @param verbose           Set to TRUE to see function messages
 plot_slice_histogram <- function(
   object = NULL,
   slices = NULL,
-  save_plot = FALSE) {
+  save_plot = FALSE,
+  verbose = TRUE) {
 
   assertive::assert_is_logical(save_plot)
 
@@ -24,7 +26,7 @@ plot_slice_histogram <- function(
 
   # convert stanfit
   if ((class(object) == "stanfit") | (class(object) == "data.frame")) {
-    object <- as_backfillz(object)
+    object <- as_backfillz(object, verbose)
   }
 
   # Preallocate the data frame stored in the backfillz object
@@ -37,11 +39,13 @@ plot_slice_histogram <- function(
 
   # Check slices argument
   if (is.null(slices)) { # if no argument for slices
-    message("Using default slices of 0 - 0.4, 0.8 - 1.")
-    message("Plotting the first two parameters only.")
-    message(
-      paste0("To plot other parameters please pass ",
-       "a slice argument to plot_slice_histogram"))
+    if (verbose) {
+          message("Using default slices of 0 - 0.4, 0.8 - 1.")
+          message("Plotting the first two parameters only.")
+          message(
+            paste0("To plot other parameters please pass ",
+            "a slice argument to plot_slice_histogram"))
+    }
     parameters <-
      as.array(attributes(object@mcmc_samples)$dimnames$parameters)[1:2]
     lower <- c(0, 0.8)

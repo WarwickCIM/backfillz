@@ -3,7 +3,7 @@ test_that("spiral stream plot is correctly generated", {
     library(tools)
 
     # write out plot as a postscript file
-    x <- as_backfillz(sample_stanfit)
+    x <- as_backfillz(sample_stanfit, verbose = FALSE)
     postscript(file = "sample_spiral_stream.ps",
      fonts = c("sans", "Palatino"))
     x <- plot_spiral_stream(x, verbose = FALSE)
@@ -15,10 +15,12 @@ test_that("spiral stream plot is correctly generated", {
     # postscript files seem to be platform dependent
     # we have expected files for Windows
     if (version$platform == "x86_64-w64-mingw32") {
-        expect_true(
+        plots_same <-
             md5sum("sample_spiral_stream.ps") ==
             md5sum("expected_spiral_stream_windows10.ps")
-        )
+        # cleanup
+        file.remove("sample_spiral_stream.ps")
+        expect_true(plots_same)
     } else {
         expect_true(TRUE)
     }
