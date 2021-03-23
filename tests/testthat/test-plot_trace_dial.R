@@ -1,12 +1,12 @@
-test_that("slice histogram plot is correctly generated", {
+test_that("trace dial plot is correctly generated", {
     library(backfillz)
     library(tools)
 
     # write out plot as a postscript file
     x <- as_backfillz(sample_stanfit, verbose = FALSE)
-    postscript(file = "sample_slice_histogram.ps",
+    postscript(file = "sample_trace_dial.ps",
      fonts = c("sans", "Palatino"))
-    x <- plot_slice_histogram(x, verbose = FALSE)
+    x <- plot_trace_dial(x, verbose = FALSE)
     dev.off()
 
     # compare md5sums of file
@@ -16,10 +16,10 @@ test_that("slice histogram plot is correctly generated", {
     # we have expected files for Windows
     if (version$platform == "x86_64-w64-mingw32") {
         plots_same <-
-            md5sum("sample_slice_histogram.ps") ==
-            md5sum("expected_slice_histogram_windows10.ps")
+            md5sum("sample_trace_dial.ps") ==
+            md5sum("expected_trace_dial_windows10.ps")
         # cleanup
-        file.remove("sample_slice_histogram.ps")
+        file.remove("sample_trace_dial.ps")
         expect_true(plots_same)
     } else {
         expect_true(TRUE)

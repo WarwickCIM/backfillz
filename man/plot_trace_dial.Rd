@@ -9,7 +9,8 @@ plot_trace_dial(
   parameters = NULL,
   n_bins = 40,
   n_burnin = 10,
-  save_plot = FALSE
+  save_plot = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ at end of dial.}
 \item{n_burnin}{Number of burnin samples.}
 
 \item{save_plot}{Set to TRUE to save plots in the Backfillz object.}
+
+\item{verbose}{Set to TRUE to see function messages}
 }
 \description{
 Creates a trace dial plot
