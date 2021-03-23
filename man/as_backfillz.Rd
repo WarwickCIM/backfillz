@@ -4,10 +4,12 @@
 \alias{as_backfillz}
 \title{Convert stanFit object to a Backfillz object}
 \usage{
-as_backfillz(object)
+as_backfillz(object, verbose = TRUE)
 }
 \arguments{
-\item{object}{Stanfit or dataframe.
+\item{object}{Stanfit or dataframe.}
+
+\item{verbose}{Set to TRUE to see function messages
 Dataframe must contain columns 'parameters', 'iterations' and 'chains'.}
 }
 \description{

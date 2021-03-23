@@ -9,13 +9,15 @@
 #'  two parameters.
 #' @param laps              Number of laps for the spitals. Defaults to 4.
 #' @param save_plot         Set to TRUE to save plots in the Backfillz object.
+#' @param verbose           Set to TRUE to see function messages
 plot_spiral_stream <- function(
   object = NULL,
   start_sample = NULL,
   steps = NULL,
   parameters = NULL,
   laps = 4,
-  save_plot = FALSE) {
+  save_plot = FALSE,
+  verbose = TRUE) {
 
   assertive::assert_is_logical(save_plot)
 
@@ -29,7 +31,7 @@ plot_spiral_stream <- function(
 
   # convert stanfit
   if ((class(object) == "stanfit") | (class(object) == "data.frame")) {
-    object <- as_backfillz(object)
+    object <- as_backfillz(object, verbose)
   }
 
   # Preallocate the data frame stored in the backfillz object
@@ -47,7 +49,10 @@ plot_spiral_stream <- function(
 
   # assign default of first 2 parameters if parameters are not specified
   if (is.null(parameters)) {
-    message("No parameters specified. Plotting the first two model parameters.")
+    if (verbose) {
+      message(paste0("No parameters specified. ",
+      "Plotting the first two model parameters."))
+    }
     parameters <- as.array(
       attributes(object@mcmc_samples)$dimnames$parameters)[1:2]
   }

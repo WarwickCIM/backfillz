@@ -10,7 +10,8 @@ plot_spiral_stream(
   steps = NULL,
   parameters = NULL,
   laps = 4,
-  save_plot = FALSE
+  save_plot = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ two parameters.}
 \item{laps}{Number of laps for the spitals. Defaults to 4.}
 
 \item{save_plot}{Set to TRUE to save plots in the Backfillz object.}
+
+\item{verbose}{Set to TRUE to see function messages}
 }
 \description{
 Creates a spiral steamgrapgh of MCMC chains

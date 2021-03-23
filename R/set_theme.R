@@ -3,7 +3,8 @@
 #' @param backfillz_object  Backfillz object
 #' @param theme             Character specifying theme
 #'  (e.g., 'default', 'solarized_dark')
-set_theme <- function(backfillz_object, theme = "default") {
+#' @param verbose       Set to TRUE to see function messages
+set_theme <- function(backfillz_object, theme = "default", verbose = TRUE) {
 
   # check inputs
   assertive::is_character(theme)
@@ -12,7 +13,9 @@ set_theme <- function(backfillz_object, theme = "default") {
 
   # set theme values
   if (theme == "default") {
-    message("Setting backfillz object theme to default")
+    if (verbose) {
+      message("Setting backfillz object theme to default")
+    }
     backfillz_object@theme_name               <- "default"
     backfillz_object@theme_text_family        <- "sans"
     backfillz_object@theme_text_font          <- 1
@@ -39,7 +42,9 @@ set_theme <- function(backfillz_object, theme = "default") {
       "#FF6347"
     )
   } else if (theme ==  "solarized_dark") {
-    message("Setting backfillz object theme to solarized dark")
+    if (verbose) {
+      message("Setting backfillz object theme to solarized dark")
+    }
     backfillz_object@theme_name               <- "solarized_dark"
     backfillz_object@theme_text_family        <- "mono"
     backfillz_object@theme_text_font          <- 1
@@ -66,7 +71,9 @@ set_theme <- function(backfillz_object, theme = "default") {
       "#268BD2"
     )
   } else if (theme ==  "demo 1") {
-    message("Setting backfillz object theme to demo 1")
+    if (verbose) {
+      message("Setting backfillz object theme to demo 1")
+    }
     backfillz_object@theme_name               <- "demo 1"
     backfillz_object@theme_text_family        <-  "mono"
     backfillz_object@theme_text_font          <-  1
@@ -93,7 +100,9 @@ set_theme <- function(backfillz_object, theme = "default") {
       "#7C6EAC"
     )
   } else if (theme ==  "demo 2") {
-    message("Setting backfillz object theme to demo 2")
+    if (verbose) {
+      message("Setting backfillz object theme to demo 2")
+    }
     backfillz_object@theme_name               <- "demo 2"
     backfillz_object@theme_text_family        <-  "sans"
     backfillz_object@theme_text_font          <-  1
@@ -125,7 +134,10 @@ set_theme <- function(backfillz_object, theme = "default") {
     )
 
   } else {
-    message("Theme not specified so setting backfillz object theme to default")
+    if (verbose) {
+      message(paste0("Theme not specified so setting backfillz ",
+      "object theme to default"))
+    }
     backfillz_object@theme_name               <- "default"
     backfillz_object@theme_text_family        <- "sans"
     backfillz_object@theme_text_font          <- 1

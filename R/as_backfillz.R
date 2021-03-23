@@ -1,8 +1,9 @@
 #' Convert stanFit object to a Backfillz object
 #'
 #' @param object        Stanfit or dataframe.
+#' @param verbose       Set to TRUE to see function messages
 #' Dataframe must contain columns 'parameters', 'iterations' and 'chains'.
-as_backfillz <- function(object) {
+as_backfillz <- function(object, verbose = TRUE) {
 
   # check arguments
   stopifnot((class(object) == "stanfit") | (class(object) == "data.frame"))
@@ -21,7 +22,7 @@ as_backfillz <- function(object) {
   }
 
   # set default theme
-  backfillz_object <- set_theme(backfillz_object)
+  backfillz_object <- set_theme(backfillz_object, verbose)
 
   # initialise plot history
   backfillz_object@plot_history <- data.frame(

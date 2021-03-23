@@ -4,13 +4,15 @@
 \alias{set_theme}
 \title{Set graphical plot slots of a backfillz object to a theme}
 \usage{
-set_theme(backfillz_object, theme = "default")
+set_theme(backfillz_object, theme = "default", verbose = TRUE)
 }
 \arguments{
 \item{backfillz_object}{Backfillz object}
 
 \item{theme}{Character specifying theme
 (e.g., 'default', 'solarized_dark')}
+
+\item{verbose}{Set to TRUE to see function messages}
 }
 \description{
 Set graphical plot slots of a backfillz object to a theme
