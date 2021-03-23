@@ -12,6 +12,8 @@ test_that("trace dial plot is correctly generated", {
     x <- plot_trace_dial(x, verbose = FALSE)
     dev.off()
 
+    options(warn = old_warning_level)
+
     # compare md5sums of file
     # ps files are plain text
 
