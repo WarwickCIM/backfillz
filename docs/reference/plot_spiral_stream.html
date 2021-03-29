@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/warwickCIM/backfillz/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Creates a spiral steamgrapgh of MCMC chains</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/warwickCIM/backfillz/blob/master/R/plot_spiral_stream.R'><code>R/plot_spiral_stream.R</code></a></small>
     <div class="hidden name"><code>plot_spiral_stream.Rd</code></div>
     </div>
 
@@ -121,7 +126,8 @@
   steps <span class='op'>=</span> <span class='cn'>NULL</span>,
   parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
   laps <span class='op'>=</span> <span class='fl'>4</span>,
-  save_plot <span class='op'>=</span> <span class='cn'>FALSE</span>
+  save_plot <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -129,7 +135,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.</p></td>
+      <td><p>Backfillz or Stanfit object. Stanfit objects
+are converted to Backfillz object using the as_backfillz function.</p></td>
     </tr>
     <tr>
       <th>start_sample</th>
@@ -137,11 +144,13 @@
     </tr>
     <tr>
       <th>steps</th>
-      <td><p>Vector of step increments for each spiral within chain. Defaults to 25 percent of sample for 4 steps.</p></td>
+      <td><p>Vector of step increments for each spiral
+within chain. Defaults to 25 percent of sample for 4 steps.</p></td>
     </tr>
     <tr>
       <th>parameters</th>
-      <td><p>Vector of parameters to plot. Defaults to two parameters.</p></td>
+      <td><p>Vector of parameters to plot. Defaults to
+two parameters.</p></td>
     </tr>
     <tr>
       <th>laps</th>
@@ -150,6 +159,10 @@
     <tr>
       <th>save_plot</th>
       <td><p>Set to TRUE to save plots in the Backfillz object.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Set to TRUE to see function messages</p></td>
     </tr>
     </table>
 
@@ -165,7 +178,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by James Tripp, Gregory McInerny.</p>
+  <p>Developed by <a href='https://warwick.ac.uk/jamestripp'>James Tripp</a>, <a href='https://warwick.ac.uk/fac/cross_fac/cim/people/greg-mcinerny/'>Gregory McInerny</a>.</p>
 </div>
 
 <div class="pkgdown">

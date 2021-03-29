@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/warwickCIM/backfillz/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Creates a slice histogram of MCMC chains</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/warwickCIM/backfillz/blob/master/R/plot_slice_histogram.R'><code>R/plot_slice_histogram.R</code></a></small>
     <div class="hidden name"><code>plot_slice_histogram.Rd</code></div>
     </div>
 
@@ -115,22 +120,35 @@
     <p>Creates a slice histogram of MCMC chains</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_slice_histogram</span><span class='op'>(</span>object <span class='op'>=</span> <span class='cn'>NULL</span>, slices <span class='op'>=</span> <span class='cn'>NULL</span>, save_plot <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plot_slice_histogram</span><span class='op'>(</span>
+  object <span class='op'>=</span> <span class='cn'>NULL</span>,
+  slices <span class='op'>=</span> <span class='cn'>NULL</span>,
+  save_plot <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Backfillz or Stanfit object. Stanfit objects are converted to Backfillz object using the as_backfillz function.</p></td>
+      <td><p>Backfillz or Stanfit object.
+Stanfit objects are converted to Backfillz object
+using the as_backfillz function.</p></td>
     </tr>
     <tr>
       <th>slices</th>
-      <td><p>Dataframe giving the cut off points for the trace histograms and parameters to show.</p></td>
+      <td><p>Dataframe giving the cut
+off points for the trace histograms and parameters to show.</p></td>
     </tr>
     <tr>
       <th>save_plot</th>
-      <td><p>Set to TRUE to save plots in the Backfillz object.</p></td>
+      <td><p>Set to TRUE to save plots
+in the Backfillz object.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Set to TRUE to see function messages</p></td>
     </tr>
     </table>
 
@@ -146,7 +164,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by James Tripp, Gregory McInerny.</p>
+  <p>Developed by <a href='https://warwick.ac.uk/jamestripp'>James Tripp</a>, <a href='https://warwick.ac.uk/fac/cross_fac/cim/people/greg-mcinerny/'>Gregory McInerny</a>.</p>
 </div>
 
 <div class="pkgdown">
