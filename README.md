@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
-<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig1.png" width=100% alt=""/>
+<img src="man/figures/README-header.png" width=100% alt=""/>
 
 # New View of MCMC
 
@@ -39,21 +39,21 @@ x <- plot_spiral_stream(x)
 
 ## Pretzel Plot – plot_trace_dial()
 
-This plot shows the chain and summary histograms in a format that can be easily arranged as a grid. The trace plot is stretched, clearly indicating ‘burn-in’, with density plots showing the burn-in and remainder of the chain in context. 
+This plot shows the chain and summary histograms in a format that can be easily arranged as a grid. The trace plot is stretched, clearly indicating ‘burn-in’, with density plots showing the burn-in and remainder of the chain in context.
 
-<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig2.png" width=100% alt=""/>
+<img src="man/figures/fig2.png" width=100% alt=""/>
 
 ## Slice plot - plot_slice_histogram()
 
 By partitioning chain slices, in a faceted view, users can assess chain convergence. The slices are currently specified by the user and display density plots for each slice. Have my chains converged? The slice plot offers a clear view of when and how convergence is achieved. Further statistical diagnostics can be embedded in these plots as colour encodings or additional layers and annotations.
 
-<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig3.png" width=100% alt=""/>
+<img src="man/figures/fig3.png" width=100% alt=""/>
 
 ## Splash plot - plot_spiral_stream()
 
 Based on a Theodorus spiral, we turn MCMC chains into glyphs and extract properties to answer – What does ‘good mixing’ look like? In these plots variance windows are calculated across chains and parameters. The glyphs have clear diagnostic features and will allow gridded plots to investigate large numbers of parameters.
 
-<img src="https://github.com/WarwickCIM/backfillz/raw/master/fig4.png" width=100% alt=""/>
+<img src="man/figures/fig4.png" width=100% alt=""/>
 
 # Acknowledgements
 
