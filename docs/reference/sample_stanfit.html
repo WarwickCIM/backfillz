@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Example stanfit object — sample_stanfit" />
-<meta property="og:description" content="An example stanfit object." />
+<meta property="og:description" content="An example stanfit object following the example fit
+ of a heirarchical schools model from the
+ pystan documentation.
+ 'https://pystan.readthedocs.io/en/latest/'." />
 
 
 
@@ -117,7 +120,10 @@
     </div>
 
     <div class="ref-description">
-    <p>An example stanfit object.</p>
+    <p>An example stanfit object following the example fit
+ of a heirarchical schools model from the
+ pystan documentation.
+ 'https://pystan.readthedocs.io/en/latest/'.</p>
     </div>
 
     <pre class="usage"><span class='va'>sample_stanfit</span></pre>
@@ -128,6 +134,59 @@
     <p>A stanfit object with 18 parameters,
  3 chains, 10000 iterations and 500 warmup samples</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># show model used to create sample</span>
+<span class='va'>sample_stanfit</span><span class='op'>@</span><span class='va'>stanmodel</span>
+</div><div class='output co'>#&gt; S4 class stanmodel 'fa9422f5ae55af63144368ec85d72c15' coded as follows:
+#&gt; data {
+#&gt;             int&lt;lower=0&gt; J; // number of schools
+#&gt;             real y[J]; // estimated treatment effects
+#&gt;             real&lt;lower=0&gt; sigma[J]; // s.e. of effect estimates
+#&gt;           }
+#&gt;           parameters {
+#&gt;             real mu;
+#&gt;             real&lt;lower=0&gt; tau;
+#&gt;             real eta[J];
+#&gt;           }
+#&gt;           transformed parameters {
+#&gt;             real theta[J];
+#&gt;             for (j in 1:J)
+#&gt;             theta[j] = mu + tau * eta[j];
+#&gt;           }
+#&gt;           model {
+#&gt;             target += normal_lpdf(eta | 0, 1);
+#&gt;             target += normal_lpdf(y | theta, sigma);
+#&gt;           } </div><div class='input'><span class='co'># print model summary</span>
+<span class='va'>sample_stanfit</span>
+</div><div class='output co'>#&gt; Inference for Stan model: fa9422f5ae55af63144368ec85d72c15.
+#&gt; 3 chains, each with iter=10000; warmup=500; thin=1; 
+#&gt; post-warmup draws per chain=9500, total post-warmup draws=28500.
+#&gt; 
+#&gt;            mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+#&gt; mu         7.86    0.04 5.03  -1.89   4.62   7.80  11.05  17.86 13802    1
+#&gt; tau        6.51    0.05 5.50   0.23   2.43   5.21   9.09  20.49 10453    1
+#&gt; eta[1]     0.39    0.01 0.94  -1.52  -0.22   0.41   1.03   2.17 27338    1
+#&gt; eta[2]     0.01    0.01 0.87  -1.72  -0.56   0.00   0.57   1.73 27577    1
+#&gt; eta[3]    -0.19    0.01 0.94  -2.02  -0.82  -0.20   0.43   1.68 31567    1
+#&gt; eta[4]    -0.03    0.01 0.89  -1.77  -0.63  -0.03   0.55   1.75 28273    1
+#&gt; eta[5]    -0.35    0.01 0.86  -2.01  -0.92  -0.36   0.21   1.39 26727    1
+#&gt; eta[6]    -0.20    0.01 0.90  -1.96  -0.78  -0.21   0.38   1.61 28309    1
+#&gt; eta[7]     0.35    0.01 0.89  -1.45  -0.22   0.36   0.93   2.08 29311    1
+#&gt; eta[8]     0.06    0.01 0.93  -1.78  -0.56   0.06   0.68   1.90 32215    1
+#&gt; theta[1]  11.31    0.06 8.17  -2.02   5.93  10.18  15.46  30.96 19643    1
+#&gt; theta[2]   7.86    0.03 6.24  -4.57   3.96   7.80  11.72  20.74 33010    1
+#&gt; theta[3]   6.09    0.05 7.76 -11.78   2.05   6.64  10.80  20.25 26161    1
+#&gt; theta[4]   7.61    0.04 6.50  -5.62   3.65   7.63  11.55  20.82 31248    1
+#&gt; theta[5]   5.10    0.04 6.32  -8.93   1.36   5.59   9.34  16.33 28275    1
+#&gt; theta[6]   6.15    0.04 6.76  -8.79   2.30   6.57  10.44  18.72 29247    1
+#&gt; theta[7]  10.57    0.04 6.78  -1.38   6.09   9.99  14.48  25.68 25756    1
+#&gt; theta[8]   8.43    0.05 7.84  -6.98   3.85   8.18  12.65  25.31 24430    1
+#&gt; lp__     -39.56    0.03 2.67 -45.56 -41.17 -39.28 -37.68 -35.04  8944    1
+#&gt; 
+#&gt; Samples were drawn using NUTS(diag_e) at Wed Mar 20 15:49:38 2019.
+#&gt; For each parameter, n_eff is a crude measure of effective sample size,
+#&gt; and Rhat is the potential scale reduction factor on split chains (at 
+#&gt; convergence, Rhat=1).</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

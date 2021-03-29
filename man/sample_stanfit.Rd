@@ -12,6 +12,15 @@ A stanfit object with 18 parameters,
 sample_stanfit
 }
 \description{
-An example stanfit object.
+An example stanfit object following the example fit
+ of a heirarchical schools model from the
+ pystan documentation.
+ 'https://pystan.readthedocs.io/en/latest/'.
+}
+\examples{
+# show model used to create sample
+sample_stanfit@stanmodel
+# print model summary
+sample_stanfit
 }
 \keyword{datasets}
